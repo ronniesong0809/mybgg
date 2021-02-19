@@ -42,6 +42,7 @@
       <summary>
         <div class="game">
           <img src="{{{ image }}}" data-maincolor="{{{ color }}}" alt="{{{ name }}}">
+          <span>{{{ rank }}}</span>
         </div>
       </summary>
       <div class="game-details">
@@ -50,7 +51,19 @@
             {{# helpers.highlight }}{ "attribute": "name" }{{/ helpers.highlight }}
           </a>
         </h2>
+        <div class="rating">
+          <dt>Avg. Rating</dt>
+          <dd><b>{{{ rating }}}</b> based on {{{ usersrated }}} users</dd>
+        </div>
         <dl class="properties">
+          <div>
+            <dt>Owned</dt>
+            <dd>{{{ numOwned }}}</dd>
+          </div>
+          <div>
+            <dt>Complexity</dt>
+            <dd>{{ weight }}</dd>
+          </div>
           <div>
             <dt>Players</dt>
             <dd>{{{ players_str }}}</dd>
@@ -58,14 +71,6 @@
           <div>
             <dt>Playing time</dt>
             <dd>{{ playing_time }}</dd>
-          </div>
-          <div>
-            <dt>Complexity</dt>
-            <dd>{{ weight }}</dd>
-          </div>
-          <div>
-            <dt>Tags</dt>
-            <dd>{{ tags_str }}</dd>
           </div>
           <div>
             <dt>Categories</dt>

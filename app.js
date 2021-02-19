@@ -228,6 +228,11 @@ function get_widgets(SETTINGS) {
               return;
             }
           });
+          game.rank = game.rank;
+          game.usersRated = game.usersrated;
+          game.numOwned = game.numowned;
+          game.rating = Number.parseFloat(game.rating).toFixed(2);
+          game.rank = game.rank;
           game.players_str = players.join(", ");
           game.categories_str = game.categories.join(", ");
           game.mechanics_str = game.mechanics.join(", ");
