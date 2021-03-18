@@ -221,16 +221,20 @@ body {
 
                 .game-details {
                     background: white;
-                    box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
                     border: 1px solid rgba(0,0,0,0.1);
+                    box-shadow: 5px 10px 8px 10px rgba(0,0,0,0.5);
                     border-radius: 3px;
-                    left: 8px;
                     position: absolute;
+                    left: 8px;
                     top: 8px;
-                    width: 350px;
+                    width: 500px;
                     z-index: 1;
                 }
                     .game-details .heading {
+                        padding: 10px 25px 10px 15px;
+                        margin: 0;
+                    }
+                    .game-details .game-image {
                         padding: 10px 25px 10px 15px;
                         margin: 0;
                     }

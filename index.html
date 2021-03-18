@@ -31,8 +31,6 @@
     <div class="search-box" id="search-box"></div>
     <label>Sort by:</label>
     <div class="sort-by" id="sort-by"></div>
-    <div class="stats" id="stats"></div>
-    <a class="ref" href="https://www.algolia.com"><img src="search-by-algolia.png" width="130" height="18"></a>
   </header>
   <article class="wrapper">
     <aside class="facets">
@@ -45,6 +43,7 @@
       <div class="facet" id="facet-numplays" tabindex="0"></div>
       <div class="clear-all" id="clear-all"></div>
     </aside>
+    <div class="stats" id="stats"></div>
     <main class="results">
       <div class="hits" id="hits"></div>
       <div id="pagination"></div>
@@ -65,6 +64,7 @@
             {{# helpers.highlight }}{ "attribute": "name" }{{/ helpers.highlight }}
           </a>
         </h2>
+        <img class="game-image" src="{{{ image }}}" data-maincolor="{{{ color }}}" alt="{{{ name }}}">
         <div class="rating">
           <dt>Avg. Rating</dt>
           <dd><b>{{{ rating }}}</b> based on {{{ usersrated }}} users</dd>
@@ -120,4 +120,7 @@
 
   <script src="app.js"></script>
 </body>
+<footer>
+  <a class="ref" href="https://www.algolia.com"><img src="search-by-algolia.png" width="130" height="18"></a>
+</footer>
 </html>
