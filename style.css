@@ -145,9 +145,13 @@ body {
     margin-right: 1em;
     flex-grow: 1;
 }
-@media screen and (max-width: 530px) {
+@media screen and (max-width: 600px) {
     .stats {
         display: none;
+    }
+    .ais-Hits-list {
+        margin-left: 0% !important;
+        margin-right: 0% !important;
     }
 }
 .ref {
@@ -224,7 +228,7 @@ body {
                     border: 1px solid rgba(0,0,0,0.1);
                     box-shadow: 5px 10px 8px 10px rgba(0,0,0,0.5);
                     border-radius: 3px;
-                    position: absolute;
+                    position: static;
                     left: 8px;
                     top: 8px;
                     width: 500px;
@@ -393,3 +397,9 @@ body {
         font-weight: bold;
         border: 2px solid #b71c1c;
     }
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1em;
+}
