@@ -228,9 +228,10 @@ body {
                     border: 1px solid rgba(0,0,0,0.1);
                     box-shadow: 5px 10px 8px 10px rgba(0,0,0,0.5);
                     border-radius: 3px;
-                    position: absolute;
-                    left: 8px;
-                    top: 8px;
+                    position: fixed;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
                     width: 500px;
                     z-index: 1;
                 }
