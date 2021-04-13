@@ -55,7 +55,10 @@
       <summary>
         <div class="game">
           <img src="{{{ image }}}" data-maincolor="{{{ color }}}" alt="{{{ name }}}">
-          <span>{{{ rank }}}</span>
+          <span>
+            {{# rank}}{{{ rank }}}{{/ rank }}
+            {{^ rank}} Not Ranked {{/ rank }}
+          </span>
         </div>
       </summary>
       <div class="game-details">
