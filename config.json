@@ -10,8 +10,8 @@
         }
     },
     "algolia": {
-        "app_id": "NZJIQLC10T",
-        "api_key_search_only": "4d1e750b0e93c6412ee47d94e8de5306",
+        "app_id": "OF1PJCJ3N6",
+        "api_key_search_only": "e7a76e74be46eafb00d3b7b9d14e88f7",
         "index_name": "board_Game",
         "hits_per_page": 48,
         "sort_by": "desc(rating)"
