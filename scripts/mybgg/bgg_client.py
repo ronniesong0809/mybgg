@@ -1,3 +1,4 @@
+import os
 import logging
 import time
 from xml.etree.ElementTree import fromstring
