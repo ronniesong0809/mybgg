@@ -12,10 +12,14 @@ class BGGClient:
     BASE_URL = "https://www.boardgamegeek.com/xmlapi2"
 
     def __init__(self, cache=None, debug=False):
+        headers = {}
+        headers['Authorization'] = f'Bearer {os.environ.get('BGG_TOKEN')}'
+
         if not cache:
             self.requester = requests.Session()
         else:
             self.requester = cache.cache
+            self.requester.headers = headers
 
         if debug:
             logging.basicConfig(level=logging.DEBUG)
