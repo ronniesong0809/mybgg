@@ -13,7 +13,7 @@ class BGGClient:
 
     def __init__(self, cache=None, debug=False):
         headers = {}
-        headers['Authorization'] = f'Bearer {os.environ.get('BGG_TOKEN')}'
+        headers['Authorization'] = f'Bearer {os.environ.get("BGG_TOKEN")}'
 
         if not cache:
             self.requester = requests.Session()
