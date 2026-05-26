@@ -13,11 +13,11 @@ class BGGClient:
     BASE_URL = "https://www.boardgamegeek.com/xmlapi2"
 
     def __init__(self, cache=None, debug=False):
-        token = os.environ.get("BGG_TOKEN")
-    
+        self.token = os.environ.get("BGG_TOKEN")
+
         headers = {}
-        if token:
-            headers["Authorization"] = f"Bearer {token}"
+        if self.token:
+            headers["Authorization"] = f"Bearer {self.token}"
     
         if cache:
             self.requester = cache.cache
@@ -71,14 +71,14 @@ class BGGClient:
 
         return games
 
-    def _make_request(self, url, params={}, tries=0):
+    def _make_request(self, url, params={}, tries=0, skip_auth_retry=False):
 
         try:
             response = self.requester.get(BGGClient.BASE_URL + url, params=params)
         except requests.exceptions.ConnectionError:
             if tries < 3:
                 time.sleep(2)
-                return self._make_request(url, params=params, tries=tries + 1)
+                return self._make_request(url, params=params, tries=tries + 1, skip_auth_retry=skip_auth_retry)
 
             raise BGGException("BGG API closed the connection prematurely, please try again...")
 
@@ -91,20 +91,30 @@ class BGGClient:
             if response.status_code == 202:
                 if tries < 10:
                     time.sleep(5)
-                    return self._make_request(url, params=params, tries=tries + 1)
+                    return self._make_request(url, params=params, tries=tries + 1, skip_auth_retry=skip_auth_retry)
 
             # Handle 504 Gateway Timeout
             if response.status_code == 540:
                 if tries < 3:
                     time.sleep(2)
-                    return self._make_request(url, params=params, tries=tries + 1)
+                    return self._make_request(url, params=params, tries=tries + 1, skip_auth_retry=skip_auth_retry)
 
             # Handle 429 Too Many Requests
             if response.status_code == 429:
                 if tries < 3:
                     logger.debug("BGG returned \"Too Many Requests\", waiting 30 seconds before trying again...")
                     time.sleep(30)
-                    return self._make_request(url, params=params, tries=tries + 1)
+                    return self._make_request(url, params=params, tries=tries + 1, skip_auth_retry=skip_auth_retry)
+
+            # Handle 401 Unauthorized caused by unsupported/stale auth token
+            if response.status_code == 401 and self.token and not skip_auth_retry:
+                logger.debug("BGG returned 401 Unauthorized, retrying request without BGG_TOKEN header...")
+                original_authorization = self.requester.headers.pop("Authorization", None)
+                try:
+                    return self._make_request(url, params=params, tries=tries + 1, skip_auth_retry=True)
+                finally:
+                    if original_authorization:
+                        self.requester.headers["Authorization"] = original_authorization
 
             raise BGGException(
                 f"BGG returned status code {response.status_code} when requesting {response.url}"
